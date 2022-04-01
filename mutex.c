@@ -24,8 +24,20 @@ void init_bin_sem(struct mutex* m)
 	//ftruncate(shm_id, shm_size);
 	m->init_value = 0;
 	m->binary_semaphore = sem_open("/sem", 0, S_IRUSR | S_IWUSR, m->init_value);
-	//ptr = (char*)mmap(0, shm_size, PROT_READ | PROT_WRITE, MAP_SHARED, shm_id, 0);
-	//return ptr;
+	if (m->binary_semaphore == SEM_FAILED)
+	{
+		perror("UNABLE TO OPEN SEMAPHORE\n");
+		exit(1);
+	}
+}
+
+void close_bin_sem(struct mutex* m)
+{
+	if (sem_close(m->binary_semaphore) == -1)
+	{
+		perror("UNABLE TO CLOSE SEMAPHORE\n");
+		exit(1);
+	}
 }
 
 int lock(struct mutex* m)
