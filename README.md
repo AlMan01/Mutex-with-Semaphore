@@ -1,2 +1,2 @@
 # Mutex-with-Semaphore
-Mutex implementation using binary semaphore.
+Mutex implementation using POSIX binary semaphore.
