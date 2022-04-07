@@ -16,12 +16,6 @@ struct mutex
 
 void init_bin_sem(struct mutex* m)
 {
-	//const char* shm_name = "memory";
-	//const int shm_size = 4096;
-	//int shm_id;
-	//char* ptr;
-	//shm_id = shm_open(shm_name, O_CREAT | O_RDWR, 0666);
-	//ftruncate(shm_id, shm_size);
 	m->init_value = 0;
 	m->binary_semaphore = sem_open("/sem", 0, S_IRUSR | S_IWUSR, m->init_value);
 	if (m->binary_semaphore == SEM_FAILED)
